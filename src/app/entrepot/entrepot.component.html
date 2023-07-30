@@ -1,0 +1,184 @@
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">Liste des entrepôts</h6>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <div>
+        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#addModal" data-whatever="@mdo">
+          <i class="fa fa-plus-circle"></i> Nouveau entrepôt
+        </button>
+      </div>
+      <br/>
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+        <tr>
+          <th>Nom entrepôt</th>
+          <th>Adresse</th>
+          <th>Capacité</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+          <th>Nom entrepôt</th>
+          <th>Adresse</th>
+          <th>Capacité</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Actions</th>
+        </tr>
+        </tfoot>
+        <tbody>
+        <tr>
+          <!--<td>{{ entrepot.nomEntrepot }}</td>
+          <td>{{ entrepot.adresse }}</td>
+          <td>{{ entrepot.capacite }}</td>
+          <td>{{ entrepot.typeEntrepot }}</td>
+          <td>{{ entrepot.description }}</td>-->
+          <td>ddd</td>
+          <td>ddd</td>
+          <td>ddd</td>
+          <td>ddddd</td>
+          <td>dddddd</td>
+          <td>
+            <button type="button" class="btn btn-info mr-1" data-toggle="modal" data-target="#detailsModal" data-whatever="@mdo">
+              <i class="fa fa-info-circle"></i>
+            </button>
+            <button type="button" class="btn btn-secondary mr-1" data-toggle="modal" data-target="#editModal" data-whatever="@mdo">
+              <i class="fa fa-pencil-alt"></i>
+            </button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+              <i class="fa fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="delModalLabel">Suppression d'un entrepôt</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        êtes vous-sûr de supprimer?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <button type="button" class="btn btn-primary">Supprimer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="editModalLabel">Modifier un entrepôt</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="namEntE">Nom entrepot</label>
+              <input type="text" formControlName="nomEntrepot" class="form-control" id="namEntE" placeholder="Nom">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="adresseE">Adresse</label>
+              <input type="text" formControlName="adresse" class="form-control" id="adresseE" placeholder="Adresse">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="capaciteE">Capacité</label>
+              <input type="number" formControlName="capacite" class="form-control" id="capaciteE" placeholder="Capacité">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="typeE">Type d'entrepot</label>
+              <input type="text" formControlName="typeEntrepot" class="form-control" id="typeE" placeholder="Type">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="descriptionE">Description</label>
+              <input type="text" formControlName="description" class="form-control" id="descriptionE" placeholder="Description">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="conditionE">Condition de stockage</label>
+              <input type="text" formControlName="conditionStockage" class="form-control" id="conditionE" placeholder="Condition">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <button type="button" class="btn btn-primary" >Enregistrer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="addModalLabel">Ajouter un nouveau entrepôt</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="namEnt">Nom entrepot</label>
+              <input type="text" formControlName="nomEntrepot" class="form-control" id="namEnt" placeholder="Nom">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="adresse">Adresse</label>
+              <input type="text" formControlName="adresse" class="form-control" id="adresse" placeholder="Adresse">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="capacite">Capacité</label>
+              <input type="number" formControlName="capacite" class="form-control" id="capacite" placeholder="Capacité">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="type">Type d'entrepot</label>
+              <input type="text" formControlName="typeEntrepot" class="form-control" id="type" placeholder="Type">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="description">Description</label>
+              <input type="text" formControlName="description" class="form-control" id="description" placeholder="Description">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="condition">Condition de stockage</label>
+              <input type="text" formControlName="conditionStockage" class="form-control" id="condition" placeholder="Condition">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <button type="button" class="btn btn-primary">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+</div>

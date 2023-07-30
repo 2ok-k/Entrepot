@@ -1,0 +1,31 @@
+<div class="container-fluid">
+  <div class="row" style="margin-top: 110px;">
+    <div class="col"></div>
+    <div class="col-4">
+      <div class="card shadow">
+        <div class="card-body">
+          <form>
+            <div class="mb-3">
+              <h4 class="text-dark text-muted text-center"><strong>Inscription</strong></h4>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email" name="email" placeholder="Entrez votre email" [(ngModel)]="email">
+            </div>
+            <div class="form-group">
+              <label for="password">Mot de passe</label>
+              <input type="password" class="form-control" id="password" name="password" placeholder="Entrez votre mot de passe" [(ngModel)]="password1">
+            </div>
+            <button type="button" class="btn btn-primary" (click)="register()">S'inscrire</button><br/><br/>
+            <div class="row">
+              <div class="col-md-6">
+                <a href="/login" style="text-decoration: none;">Déjà un compte? <span class="text-danger">se connecter</span></a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col"></div>
+  </div>
+</div>

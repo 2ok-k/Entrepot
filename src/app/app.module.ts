@@ -14,6 +14,7 @@ import {ToastrModule} from "ngx-toastr";
 import {AuthGuard} from "@angular/fire/auth-guard";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatFormFieldModule} from "@angular/material/form-field";
+import {getFirestore, provideFirestore} from "@angular/fire/firestore";
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
     ReactiveFormsModule,
     MatFormFieldModule,
     BrowserAnimationsModule,
+    provideFirestore(() => getFirestore())
 
   ],
   providers: [AuthService,AuthGuard],

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {AngularFireModule} from "@angular/fire/compat";
 import { AppComponent } from './app.component';
@@ -20,6 +20,7 @@ import {environment} from "../environments/environment";
 import {EntrepotService} from "./services/entrepot.service";
 import {initializeApp, provideFirebaseApp} from "@angular/fire/app";
 import firebase from "firebase/compat";
+import {NgxSpinnerModule} from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import firebase from "firebase/compat";
     ReactiveFormsModule,
     MatFormFieldModule,
     BrowserAnimationsModule,
+    NgxSpinnerModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore())
 
@@ -55,6 +57,7 @@ import firebase from "firebase/compat";
     EntrepotService,
     { provide: FIREBASE_OPTIONS, useValue: environment.firebaseConfig}
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

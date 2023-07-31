@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {EntrepotService} from "../services/entrepot.service";
 import {Entrepot} from "../models/entrepot";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-entrepot',
@@ -10,6 +11,9 @@ import {Entrepot} from "../models/entrepot";
 })
 export class EntrepotComponent implements OnInit{
   entrepotForm!: FormGroup;
+  editForm!: FormGroup;
+  entrepotDetail: any;
+  entrepotData: any = [];
 
   entrepotObj: Entrepot = {
     id: '',
@@ -22,9 +26,18 @@ export class EntrepotComponent implements OnInit{
   }
   constructor(
     private fb: FormBuilder,
-    private entrepotService: EntrepotService
+    private entrepotService: EntrepotService,
+    private spinner: NgxSpinnerService
   ) {
     this.entrepotForm = this.fb.group({
+      nomEntrepot:['',Validators.required],
+      adresse:['',Validators.required],
+      capacite:['',Validators.required],
+      typeEntrepot:['',Validators.required],
+      description:['',Validators.required],
+      conditionStockage:['',Validators.required]
+    });
+    this.editForm = this.fb.group({
       nomEntrepot:['',Validators.required],
       adresse:['',Validators.required],
       capacite:['',Validators.required],
@@ -34,6 +47,7 @@ export class EntrepotComponent implements OnInit{
     })
   }
   ngOnInit() {
+    this.getAllEntrepot();
   }
   addEntrepot(){
     const { value } = this.entrepotForm;
@@ -48,8 +62,46 @@ export class EntrepotComponent implements OnInit{
 
     this.entrepotService.addEntrepot(this.entrepotObj).then((entrepot) =>{
       if (entrepot){
-        alert("Entrepot ajouté avec succès!")
+        alert("Entrepot ajouté avec succès!");
+        this.entrepotForm.reset();
       }
     })
+  }
+
+  getAllEntrepot(){
+    this.spinner.show();
+    this.entrepotService.getEntrepot().subscribe((res:Entrepot[]) => {
+      console.log(res);
+      this.entrepotData = res;
+      this.spinner.hide();
+    })
+  }
+
+  deleteEntrepot(entrepot: Entrepot){
+    let decision = confirm("êtes vous sûr de supprimer cet entrepôt?");
+    if (decision == true){
+      this.entrepotService.deleteEntrepot(entrepot);
+    }
+  }
+
+  getAllDetails(entrepot: Entrepot){
+    this.entrepotDetail = entrepot;
+  }
+
+  updateEntrepot(entrepot: Entrepot){
+    const {value} = this.editForm;
+    console.log(value);
+    this.entrepotObj.id = entrepot.id;
+    this.entrepotObj.nomEntrepot = value.nomEntrepot;
+    this.entrepotObj.adresse = value.adresse;
+    this.entrepotObj.capacite = value.capacite;
+    this.entrepotObj.typeEntrepot = value.typeEntrepot;
+    this.entrepotObj.description = value.description;
+    this.entrepotObj.conditionStockage = value.conditionStockage;
+
+    this.entrepotService.updateEntrepot(entrepot,this.entrepotObj).then(() => {
+      alert("entrepot modifié avec succès!")
+    })
+    this.editForm.reset()
   }
 }

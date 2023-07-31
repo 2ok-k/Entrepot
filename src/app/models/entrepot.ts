@@ -6,5 +6,5 @@ export interface Entrepot {
   typeEntrepot: string;
   description: string;
   conditionStockage: string;
-  photo: string;
+  //photo: string;
 }

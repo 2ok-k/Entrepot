@@ -15,6 +15,11 @@ import {AuthGuard} from "@angular/fire/auth-guard";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {getFirestore, provideFirestore} from "@angular/fire/firestore";
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import {environment} from "../environments/environment";
+import {EntrepotService} from "./services/entrepot.service";
+import {initializeApp, provideFirebaseApp} from "@angular/fire/app";
+import firebase from "firebase/compat";
 
 @NgModule({
   declarations: [
@@ -27,24 +32,29 @@ import {getFirestore, provideFirestore} from "@angular/fire/firestore";
   ],
   imports: [
     BrowserModule,
-    AngularFireModule.initializeApp({
+    /*AngularFireModule.initializeApp({
       apiKey: "AIzaSyDfMwCIyqdcHUeUEIZiHXYwCOOL5edfaew",
       authDomain: "entrepot-c5bd3.firebaseapp.com",
       projectId: "entrepot-c5bd3",
       storageBucket: "entrepot-c5bd3.appspot.com",
       messagingSenderId: "663124611974",
       appId: "1:663124611974:web:3ffe0b25ef9bc390515207"
-    }),
+    }),*/
     AppRoutingModule,
     FormsModule,
     ToastrModule.forRoot(),
     ReactiveFormsModule,
     MatFormFieldModule,
     BrowserAnimationsModule,
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore())
 
   ],
-  providers: [AuthService,AuthGuard],
+  providers: [
+    AuthService,
+    EntrepotService,
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebaseConfig}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -142,7 +142,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form [formGroup]="entrepotForm">
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="namEnt">Nom entrepot</label>
@@ -177,7 +177,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        <button type="button" class="btn btn-primary">Enregistrer</button>
+        <button type="button" class="btn btn-primary" (click)="addEntrepot()">Enregistrer</button>
       </div>
     </div>
   </div>

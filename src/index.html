@@ -19,6 +19,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
 </head>
 <body class="mat-typography">
   <app-root></app-root>
@@ -47,5 +48,9 @@
 
   <!-- Page level custom scripts -->
   <script src="assets/js/demo/datatables-demo.js"></script>
+  <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+  <script>
+    new DataTable('#example');
+  </script>
 </body>
 </html>

@@ -21,7 +21,7 @@ export class AuthService implements OnInit{
     this.fireAuth.signInWithEmailAndPassword(email,password)
       .then(() => {
           localStorage.setItem('token','true');
-          this.router.navigate(['accueil/dashboard']);
+          this.router.navigate(['accueil/entrepot']);
           //this.toastr.success('Connexion réussie !', 'Bienvenue');
       },err =>{
           //alert('Email ou mot de passe incorrect!');

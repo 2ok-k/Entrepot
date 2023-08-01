@@ -3,6 +3,10 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {EntrepotService} from "../services/entrepot.service";
 import {Entrepot} from "../models/entrepot";
 import { NgxSpinnerService } from "ngx-spinner";
+import {Router} from "@angular/router";
+
+
+
 
 @Component({
   selector: 'app-entrepot',
@@ -14,6 +18,12 @@ export class EntrepotComponent implements OnInit{
   editForm!: FormGroup;
   entrepotDetail: any;
   entrepotData: any = [];
+
+
+  showSuccessMessage: boolean = false;
+  hideSuccessMessage() {
+    this.showSuccessMessage = false;
+  }
 
   entrepotObj: Entrepot = {
     id: '',
@@ -27,7 +37,8 @@ export class EntrepotComponent implements OnInit{
   constructor(
     private fb: FormBuilder,
     private entrepotService: EntrepotService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private route: Router
   ) {
     this.entrepotForm = this.fb.group({
       nomEntrepot:['',Validators.required],
@@ -62,8 +73,11 @@ export class EntrepotComponent implements OnInit{
 
     this.entrepotService.addEntrepot(this.entrepotObj).then((entrepot) =>{
       if (entrepot){
-        alert("Entrepot ajouté avec succès!");
+        //alert("Entrepot ajouté avec succès!");
+        window.location.reload();
+        this.showSuccessMessage = true;
         this.entrepotForm.reset();
+
       }
     })
   }
@@ -81,6 +95,7 @@ export class EntrepotComponent implements OnInit{
     let decision = confirm("êtes vous sûr de supprimer cet entrepôt?");
     if (decision == true){
       this.entrepotService.deleteEntrepot(entrepot);
+      this.showSuccessMessage = true;
     }
   }
 
@@ -100,7 +115,8 @@ export class EntrepotComponent implements OnInit{
     this.entrepotObj.conditionStockage = value.conditionStockage;
 
     this.entrepotService.updateEntrepot(entrepot,this.entrepotObj).then(() => {
-      alert("entrepot modifié avec succès!")
+      alert("entrepot modifié avec succès!");
+      this.showSuccessMessage = true;
     })
     this.editForm.reset()
   }

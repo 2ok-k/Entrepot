@@ -44,7 +44,15 @@ export class LoginComponent implements OnInit{
       this.errorMessage1 = 'Veuillez renseigner un mot de passe svp!';
       return;
     }
-    this.auth.login(this.email,this.password1);
+    this.auth.login(this.email, this.password1).subscribe(
+      () => {
+        //tout est bon, redirection sur la page d'entrepôts
+      },
+      (error) => {
+        // La connexion échoue, afficher le message d'erreur
+        this.errorMessage1 = error;
+      }
+    );
     this.email = '';
     this.password1 = '';
   }

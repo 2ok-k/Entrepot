@@ -2,6 +2,7 @@ import {Injectable, OnInit} from '@angular/core';
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {Router} from "@angular/router";
 import {ToastrModule, ToastrService} from "ngx-toastr";
+import {catchError, from, map, Observable, throwError} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -27,17 +28,18 @@ export class AuthService implements OnInit{
   ) { }
 
   //Méthode de connexion
-  login(email : string , password : string){
-    this.fireAuth.signInWithEmailAndPassword(email,password)
-      .then(() => {
-          localStorage.setItem('token','true');
-          this.router.navigate(['accueil/entrepot']);
-          //this.toastr.success('Connexion réussie !', 'Bienvenue');
-      },err =>{
-          //alert('Email ou mot de passe incorrect!');
-         alert(err.message);
-         this.router.navigate(['/login']);
+  // @ts-ignore
+  login(email : string , password : string): Observable<any>{
+    return from(this.fireAuth.signInWithEmailAndPassword(email, password)).pipe(
+      map(() => {
+        localStorage.setItem('token', 'true');
+        this.router.navigate(['accueil/entrepot']);
+        return {};
+      }),
+      catchError(err => {
+        return throwError('Email ou mot de passe incorrect!');
       })
+    );
   }
 
 

@@ -12,7 +12,6 @@ export class AccueilComponent implements OnInit{
   constructor(private auth : AuthService,private toastr: ToastrService) {
   }
   ngOnInit() {
-    this.toastr.success('Bienvenue sur le dashboard !', 'Succès');
   }
 
   logout() {

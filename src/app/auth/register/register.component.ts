@@ -9,9 +9,13 @@ import {AuthService} from "../../services/auth.service";
 export class RegisterComponent implements OnInit{
   email : string = '';
   password1 : string = '';
+  showPassword: boolean = false;
   constructor(private auth : AuthService) {
   }
   ngOnInit() {
+  }
+  toggleShowPassword() {
+    this.showPassword = !this.showPassword;
   }
 
   register() {

@@ -9,12 +9,19 @@
               <h4 class="text-dark text-muted text-center"><strong>Inscription</strong></h4>
             </div>
             <div class="form-group">
-              <label for="email">Email</label>
+              <label for="email">Email <span style="color: red">*</span></label>
               <input type="email" class="form-control" id="email" name="email" placeholder="Entrez votre email" [(ngModel)]="email">
             </div>
             <div class="form-group">
-              <label for="password">Mot de passe</label>
-              <input type="password" class="form-control" id="password" name="password" placeholder="Entrez votre mot de passe" [(ngModel)]="password1">
+              <label for="password">Mot de passe <span style="color: red">*</span></label>
+              <div class="input-group">
+                <input type="{{ showPassword ? 'text' : 'password' }}" type="password" class="form-control" id="password" name="password" placeholder="Entrez votre mot de passe" [(ngModel)]="password1">
+                <div class="input-group-append">
+                  <span class="input-group-text" (click)="toggleShowPassword()">
+                    <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+                  </span>
+                </div>
+              </div>
             </div>
             <button type="button" class="btn btn-primary" (click)="register()">S'inscrire</button><br/><br/>
             <div class="row">

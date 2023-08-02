@@ -27,6 +27,10 @@ export class AuthService implements OnInit{
     //private toastr: ToastrService
   ) { }
 
+  getUserEmail(): Observable<string | null> {
+    // @ts-ignore
+    return this.fireAuth.authState.pipe(map(user => user?.email));
+  }
   //Méthode de connexion
   // @ts-ignore
   login(email : string , password : string): Observable<any>{

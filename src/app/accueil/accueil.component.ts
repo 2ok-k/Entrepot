@@ -8,10 +8,15 @@ import {ToastrService} from "ngx-toastr";
   styleUrls: ['./accueil.component.css']
 })
 export class AccueilComponent implements OnInit{
-  @Output() isLogout = new EventEmitter<void>()
+  @Output() isLogout = new EventEmitter<void>();
+
+  userEmail!: string | null;
   constructor(private auth : AuthService,private toastr: ToastrService) {
   }
   ngOnInit() {
+    this.auth.getUserEmail().subscribe(email => {
+      this.userEmail = email;
+    });
   }
 
   logout() {

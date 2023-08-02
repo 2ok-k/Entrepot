@@ -3,3 +3,7 @@ $(function(){
     $('#target').toggleClass('active');
   });
 });
+
+function initDataTable() {
+  new DataTable('#example');
+}

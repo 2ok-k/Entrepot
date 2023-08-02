@@ -7,6 +7,16 @@ import {ToastrModule, ToastrService} from "ngx-toastr";
   providedIn: 'root'
 })
 export class AuthService implements OnInit{
+
+  private errorMessage = '';
+  setErrorMessage(message: string) {
+    this.errorMessage = message;
+  }
+  getErrorMessage(): string {
+    return this.errorMessage;
+  }
+
+
   ngOnInit() {
   }
 
@@ -57,6 +67,8 @@ export class AuthService implements OnInit{
   }
 
   IsLoggedIn(){
-    return !!localStorage.getItem('token')
+    const isLoggedIn = !!localStorage.getItem('token');
+    console.log('IsLoggedIn:', isLoggedIn);
+    return isLoggedIn;
   }
 }

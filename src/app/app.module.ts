@@ -54,6 +54,7 @@ import {NgxSpinnerModule} from "ngx-spinner";
   ],
   providers: [
     AuthService,
+    AuthGuard,
     EntrepotService,
     { provide: FIREBASE_OPTIONS, useValue: environment.firebaseConfig}
   ],

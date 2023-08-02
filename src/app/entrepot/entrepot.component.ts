@@ -6,8 +6,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import {Router} from "@angular/router";
 
 
-
-
+//declare function initDataTable() : any;
 @Component({
   selector: 'app-entrepot',
   templateUrl: './entrepot.component.html',
@@ -18,12 +17,11 @@ export class EntrepotComponent implements OnInit{
   editForm!: FormGroup;
   entrepotDetail: any;
   entrepotData: any = [];
-
-
   showSuccessMessage: boolean = false;
   hideSuccessMessage() {
     this.showSuccessMessage = false;
-  }
+  };
+  entrepotToDelete: Entrepot | null = null;
 
   entrepotObj: Entrepot = {
     id: '',
@@ -49,16 +47,17 @@ export class EntrepotComponent implements OnInit{
       conditionStockage:['',Validators.required]
     });
     this.editForm = this.fb.group({
-      nomEntrepot:['',Validators.required],
-      adresse:['',Validators.required],
-      capacite:['',Validators.required],
-      typeEntrepot:['',Validators.required],
-      description:['',Validators.required],
-      conditionStockage:['',Validators.required]
+      edit_nomEntrepot:['',Validators.required],
+      edit_adresse:['',Validators.required],
+      edit_capacite:['',Validators.required],
+      edit_typeEntrepot:['',Validators.required],
+      edit_description:['',Validators.required],
+      edit_conditionStockage:['',Validators.required]
     })
   }
   ngOnInit() {
     this.getAllEntrepot();
+    //initDataTable();
   }
   addEntrepot(){
     const { value } = this.entrepotForm;
@@ -73,9 +72,8 @@ export class EntrepotComponent implements OnInit{
 
     this.entrepotService.addEntrepot(this.entrepotObj).then((entrepot) =>{
       if (entrepot){
-        //alert("Entrepot ajouté avec succès!");
-        window.location.reload();
         this.showSuccessMessage = true;
+        window.location.reload();
         this.entrepotForm.reset();
 
       }
@@ -91,32 +89,44 @@ export class EntrepotComponent implements OnInit{
     })
   }
 
-  deleteEntrepot(entrepot: Entrepot){
-    let decision = confirm("êtes vous sûr de supprimer cet entrepôt?");
-    if (decision == true){
-      this.entrepotService.deleteEntrepot(entrepot);
-      this.showSuccessMessage = true;
+  setEntrepotToDelete(entrepot: Entrepot) {
+    this.entrepotToDelete = entrepot;
+  }
+  deleteEntrepot() {
+    if (this.entrepotToDelete) {
+      this.entrepotService.deleteEntrepot(this.entrepotToDelete).then(() => {
+        this.showSuccessMessage = true;
+        window.location.reload();
+      });
     }
+    //$('#deleteModal').modal('hide');
   }
 
   getAllDetails(entrepot: Entrepot){
     this.entrepotDetail = entrepot;
+    this.editForm.reset({
+      edit_nomEntrepot: entrepot.nomEntrepot,
+      edit_adresse: entrepot.adresse,
+      edit_capacite: entrepot.capacite,
+      edit_typeEntrepot: entrepot.typeEntrepot,
+      edit_description: entrepot.description,
+      edit_conditionStockage: entrepot.conditionStockage
+    });
   }
 
   updateEntrepot(entrepot: Entrepot){
     const {value} = this.editForm;
-    console.log(value);
-    this.entrepotObj.id = entrepot.id;
-    this.entrepotObj.nomEntrepot = value.nomEntrepot;
-    this.entrepotObj.adresse = value.adresse;
-    this.entrepotObj.capacite = value.capacite;
-    this.entrepotObj.typeEntrepot = value.typeEntrepot;
-    this.entrepotObj.description = value.description;
-    this.entrepotObj.conditionStockage = value.conditionStockage;
-
-    this.entrepotService.updateEntrepot(entrepot,this.entrepotObj).then(() => {
-      alert("entrepot modifié avec succès!");
+    const champsMisAJour: Partial<Entrepot> = {
+      nomEntrepot: value.edit_nomEntrepot,
+      adresse: value.edit_adresse,
+      capacite: value.edit_capacite,
+      typeEntrepot: value.edit_typeEntrepot,
+      description: value.edit_description,
+      conditionStockage: value.edit_conditionStockage
+    };
+    this.entrepotService.updateEntrepot(entrepot,champsMisAJour).then(() => {
       this.showSuccessMessage = true;
+      window.location.reload();
     })
     this.editForm.reset()
   }

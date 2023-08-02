@@ -16,49 +16,6 @@
         </button>
       </div>
       <br/>
-      <!--<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-        <thead>
-        <tr>
-          <th>Nom entrepôt</th>
-          <th>Adresse</th>
-          <th>Capacité</th>
-          <th>Type</th>
-          <th>Description</th>
-          <th>Actions</th>
-        </tr>
-        </thead>
-        <tfoot>
-        <tr>
-          <th>Nom entrepôt</th>
-          <th>Adresse</th>
-          <th>Capacité</th>
-          <th>Type</th>
-          <th>Description</th>
-          <th>Actions</th>
-        </tr>
-        </tfoot>
-        <tbody>
-        <tr *ngFor="let entrepot of entrepotData">
-          <td>{{ entrepot.nomEntrepot }}</td>
-          <td>{{ entrepot.adresse }}</td>
-          <td>{{ entrepot.capacite }}</td>
-          <td>{{ entrepot.typeEntrepot }}</td>
-          <td>{{ entrepot.description }}</td>
-          <td>
-            <button type="button" class="btn btn-info mr-1" data-toggle="modal" data-target="#detailsModal" data-whatever="@mdo">
-              <i class="fa fa-info-circle"></i>
-            </button>
-            <button type="button" class="btn btn-secondary mr-1" (click)="getAllDetails(entrepot)" data-toggle="modal" data-target="#editModal" data-whatever="@mdo">
-              <i class="fa fa-pencil-alt"></i>
-            </button>
-&lt;!&ndash;            data-toggle="modal" data-target="#deleteModal"&ndash;&gt;
-            <button type="button" class="btn btn-danger" (click)="deleteEntrepot(entrepot)" >
-              <i class="fa fa-trash"></i>
-            </button>
-          </td>
-        </tr>
-        </tbody>
-      </table>-->
 
       <div *ngIf="showSuccessMessage" class="alert alert-success alert-dismissible fade show" role="alert">
         Opération effectuée avec succès!
@@ -66,15 +23,15 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <table id="example" class="table table-striped" style="width:100%">
+      <table class="table table-bordered">
         <thead>
         <tr>
-          <th>Nom entrepôt</th>
-          <th>Adresse</th>
-          <th>Capacité</th>
-          <th>Type</th>
-          <th>Description</th>
-          <th>Actions</th>
+          <th scope="col">Nom entrepôt</th>
+          <th scope="col">Adresse</th>
+          <th scope="col">Capacité</th>
+          <th scope="col">Type</th>
+          <th scope="col">Description</th>
+          <th scope="col">Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -91,23 +48,12 @@
             <button type="button" class="btn btn-secondary mr-1" (click)="getAllDetails(entrepot)" data-toggle="modal" data-target="#editModal" data-whatever="@mdo">
               <i class="fa fa-pencil-alt"></i>
             </button>
-            <!--            data-toggle="modal" data-target="#deleteModal"-->
-            <button type="button" class="btn btn-danger" (click)="deleteEntrepot(entrepot)" >
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" (click)="setEntrepotToDelete(entrepot)">
               <i class="fa fa-trash"></i>
             </button>
           </td>
         </tr>
         </tbody>
-        <tfoot>
-        <tr>
-          <th>Nom entrepôt</th>
-          <th>Adresse</th>
-          <th>Capacité</th>
-          <th>Type</th>
-          <th>Description</th>
-          <th>Actions</th>
-        </tr>
-        </tfoot>
       </table>
     </div>
   </div>
@@ -127,7 +73,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        <button type="button" class="btn btn-primary" >Supprimer</button>
+        <button type="button" class="btn btn-primary" (click)="deleteEntrepot()">Supprimer</button>
       </div>
     </div>
   </div>
@@ -148,38 +94,38 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="namEntE">Nom entrepot</label>
-              <input type="text" formControlName="nomEntrepot" [value]="entrepotDetail?.nomEntrepot" class="form-control" id="namEntE" placeholder="Nom">
+              <input type="text" formControlName="edit_nomEntrepot" [value]="entrepotDetail?.nomEntrepot" class="form-control" id="namEntE" placeholder="Nom">
             </div>
             <div class="form-group col-md-6">
               <label for="adresseE">Adresse</label>
-              <input type="text" formControlName="adresse" [value]="entrepotDetail?.adresse" class="form-control" id="adresseE" placeholder="Adresse">
+              <input type="text" formControlName="edit_adresse" [value]="entrepotDetail?.adresse" class="form-control" id="adresseE" placeholder="Adresse">
             </div>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="capaciteE">Capacité</label>
-              <input type="number" formControlName="capacite" [value]="entrepotDetail?.capacite" class="form-control" id="capaciteE" placeholder="Capacité">
+              <input type="number" formControlName="edit_capacite" [value]="entrepotDetail?.capacite" class="form-control" id="capaciteE" placeholder="Capacité">
             </div>
             <div class="form-group col-md-6">
               <label for="typeE">Type d'entrepot</label>
-              <input type="text" formControlName="typeEntrepot" [value]="entrepotDetail?.typeEntrepot" class="form-control" id="typeE" placeholder="Type">
+              <input type="text" formControlName="edit_typeEntrepot" [value]="entrepotDetail?.typeEntrepot" class="form-control" id="typeE" placeholder="Type">
             </div>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="descriptionE">Description</label>
-              <input type="text" formControlName="description" [value]="entrepotDetail?.description" class="form-control" id="descriptionE" placeholder="Description">
+              <input type="text" formControlName="edit_description" [value]="entrepotDetail?.description" class="form-control" id="descriptionE" placeholder="Description">
             </div>
             <div class="form-group col-md-6">
               <label for="conditionE">Condition de stockage</label>
-              <input type="text" formControlName="conditionStockage" [value]="entrepotDetail?.conditionStockage" class="form-control" id="conditionE" placeholder="Condition">
+              <input type="text" formControlName="edit_conditionStockage" [value]="entrepotDetail?.conditionStockage" class="form-control" id="conditionE" placeholder="Condition">
             </div>
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        <button type="button" class="btn btn-primary" (click)="updateEntrepot(entrepotData)">Enregistrer</button>
+        <button type="button" class="btn btn-primary" (click)="updateEntrepot(entrepotDetail)">Enregistrer</button>
       </div>
     </div>
   </div>

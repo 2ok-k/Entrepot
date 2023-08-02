@@ -12,7 +12,11 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 export class LoginComponent implements OnInit{
   email : string = '';
   password1 : string = '';
+  errorMessage1: string = '';
+
   errorMessage: string = '';
+
+  showPassword: boolean = false;
 
 
 /*  hide: boolean = true;
@@ -23,16 +27,21 @@ export class LoginComponent implements OnInit{
   })*/
 
   constructor(private auth: AuthService,private router :Router) {
+    this.errorMessage = this.auth.getErrorMessage();
+    this.auth.setErrorMessage('');
   }
   ngOnInit() {
   }
+  toggleShowPassword() {
+    this.showPassword = !this.showPassword;
+  }
   login(){
     if (this.email == ''){
-      this.errorMessage = 'Veuillez renseigner un email svp!';
+      this.errorMessage1 = 'Veuillez renseigner un email svp!';
       return;
     }
     if (this.password1 == ''){
-      this.errorMessage = 'Veuillez renseigner un mot de passe svp!';
+      this.errorMessage1 = 'Veuillez renseigner un mot de passe svp!';
       return;
     }
     this.auth.login(this.email,this.password1);

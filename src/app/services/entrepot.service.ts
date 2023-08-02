@@ -38,8 +38,8 @@ export class EntrepotService implements OnInit{
   }
 
   //Méthode de mise à jour d'un entrepot
-  updateEntrepot(entrepot: Entrepot,entrepots:any){
+  updateEntrepot(entrepot: Entrepot,champsMisAJour: Partial<Entrepot>){
     let docRef = doc(this.fs,`Entrepots/${entrepot.id}`);
-    return updateDoc(docRef,entrepots);
+    return updateDoc(docRef,champsMisAJour);
   }
 }

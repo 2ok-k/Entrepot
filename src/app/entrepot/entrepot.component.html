@@ -32,7 +32,7 @@
             <th scope="col">Capacité</th>
             <th scope="col">Type</th>
             <th scope="col">Description</th>
-            <th scope="col">Actions</th>
+            <th scope="col" class="text-center" style="width: 11%">Actions</th>
           </tr>
           </thead>
           <tbody>
@@ -42,7 +42,7 @@
             <td>{{ entrepot.capacite }}</td>
             <td>{{ entrepot.typeEntrepot }}</td>
             <td>{{ entrepot.description }}</td>
-            <td>
+            <td class="d-flex justify-content-end text-center">
               <button type="button" class="btn btn-info mr-1" (click)="getAllDetails(entrepot)" data-toggle="modal" data-target="#detailsModal" data-whatever="@mdo">
                 <i class="fa fa-info-circle"></i>
               </button>
@@ -95,31 +95,31 @@
         <form [formGroup]="editForm">
           <div class="form-row">
             <div class="form-group col-md-6">
-              <label for="namEntE">Nom entrepot</label>
+              <label for="namEntE">Nom entrepot <span style="color: red">*</span></label>
               <input type="text" formControlName="edit_nomEntrepot" [value]="entrepotDetail?.nomEntrepot" class="form-control" id="namEntE" placeholder="Nom">
             </div>
             <div class="form-group col-md-6">
-              <label for="adresseE">Adresse</label>
+              <label for="adresseE">Adresse <span style="color: red">*</span></label>
               <input type="text" formControlName="edit_adresse" [value]="entrepotDetail?.adresse" class="form-control" id="adresseE" placeholder="Adresse">
             </div>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
-              <label for="capaciteE">Capacité</label>
+              <label for="capaciteE">Capacité <span style="color: red">*</span></label>
               <input type="number" formControlName="edit_capacite" [value]="entrepotDetail?.capacite" class="form-control" id="capaciteE" placeholder="Capacité">
             </div>
             <div class="form-group col-md-6">
-              <label for="typeE">Type d'entrepot</label>
+              <label for="typeE">Type d'entrepot <span style="color: red">*</span></label>
               <input type="text" formControlName="edit_typeEntrepot" [value]="entrepotDetail?.typeEntrepot" class="form-control" id="typeE" placeholder="Type">
             </div>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
-              <label for="descriptionE">Description</label>
+              <label for="descriptionE">Description <span style="color: red">*</span></label>
               <input type="text" formControlName="edit_description" [value]="entrepotDetail?.description" class="form-control" id="descriptionE" placeholder="Description">
             </div>
             <div class="form-group col-md-6">
-              <label for="conditionE">Condition de stockage</label>
+              <label for="conditionE">Condition de stockage <span style="color: red">*</span></label>
               <input type="text" formControlName="edit_conditionStockage" [value]="entrepotDetail?.conditionStockage" class="form-control" id="conditionE" placeholder="Condition">
             </div>
           </div>
@@ -127,7 +127,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        <button type="button" class="btn btn-primary" (click)="updateEntrepot(entrepotDetail)">Enregistrer</button>
+        <button type="button" class="btn btn-primary" (click)="updateEntrepot(entrepotDetail)" [disabled]="editForm.invalid">Modifier</button>
       </div>
     </div>
   </div>

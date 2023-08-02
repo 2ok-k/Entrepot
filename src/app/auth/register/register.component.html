@@ -1,38 +1,24 @@
-<div class="container-fluid">
-  <div class="row" style="margin-top: 110px;">
-    <div class="col"></div>
-    <div class="col-4">
-      <div class="card shadow">
-        <div class="card-body">
-          <form>
-            <div class="mb-3">
-              <h4 class="text-dark text-muted text-center"><strong>Inscription</strong></h4>
-            </div>
-            <div class="form-group">
-              <label for="email">Email <span style="color: red">*</span></label>
-              <input type="email" class="form-control" id="email" name="email" placeholder="Entrez votre email" [(ngModel)]="email">
-            </div>
-            <div class="form-group">
-              <label for="password">Mot de passe <span style="color: red">*</span></label>
-              <div class="input-group">
-                <input type="{{ showPassword ? 'text' : 'password' }}" type="password" class="form-control" id="password" name="password" placeholder="Entrez votre mot de passe" [(ngModel)]="password1">
-                <div class="input-group-append">
-                  <span class="input-group-text" (click)="toggleShowPassword()">
-                    <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
-                  </span>
-                </div>
-              </div>
-            </div>
-            <button type="button" class="btn btn-primary" (click)="register()">S'inscrire</button><br/><br/>
-            <div class="row">
-              <div class="col-md-6">
-                <a href="/login" style="text-decoration: none;">Déjà un compte? <span class="text-danger">se connecter</span></a>
-              </div>
-            </div>
-          </form>
+<div class="container">
+  <div class="card">
+    <h2>Formulaire d'inscription</h2>
+    <form>
+      <label for="email">Email <span style="color: red">*</span></label>
+      <input type="email" class="form-control" id="email" name="email" placeholder="Entrez votre email" [(ngModel)]="email">
+
+      <label for="password">Mot de passe <span style="color: red">*</span></label>
+      <div class="input-group">
+        <input type="{{ showPassword ? 'text' : 'password' }}" type="password" class="form-control" id="password" name="password" placeholder="Entrez votre mot de passe" [(ngModel)]="password1">
+        <div class="input-group-append">
+            <span class="input-group-text" (click)="toggleShowPassword()">
+              <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+            </span>
         </div>
       </div>
-    </div>
-    <div class="col"></div>
+      <br>
+
+      <button type="submit" (click)="register()">Inscription</button>
+    </form>
+    <div class="switch">Déjà un compte? <a href="/login" onclick="switchCard()">Se connecter</a></div>
   </div>
 </div>
+

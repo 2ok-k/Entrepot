@@ -1,48 +1,28 @@
-<div class="container-fluid">
-  <div class="row" style="margin-top: 110px;">
-    <div class="col"></div>
-    <div class="col-4">
-      <div class="card shadow">
-        <div class="card-body">
-          <div *ngIf="errorMessage1" class="alert alert-danger" role="alert">
-            {{ errorMessage1 }}
-          </div>
-          <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
-            {{ errorMessage }}
-          </div>
-          <form>
-            <div class="mb-3">
-              <h4 class="text-dark text-muted text-center"><strong>Connexion</strong></h4>
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" class="form-control" id="email" name="email" placeholder="Entrez votre email" [(ngModel)]="email">
-            </div>
-            <div class="form-group">
-              <label for="password">Mot de passe</label>
-<!--              <input type="password" class="form-control" id="password" name="password" placeholder="Entrez votre mot de passe" [(ngModel)]="password1">-->
-              <div class="input-group">
-                <input type="{{ showPassword ? 'text' : 'password' }}" class="form-control" id="password" name="password" placeholder="Entrez votre mot de passe" [(ngModel)]="password1">
-                <div class="input-group-append">
-                  <span class="input-group-text" (click)="toggleShowPassword()">
-                    <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
-                  </span>
-                </div>
-              </div>
-            </div>
-            <button type="button" class="btn btn-primary" (click)="login()">Se connecter</button><br/><br/>
-            <div class="row">
-              <div class="col-md-6">
-                <a routerLink="/register" style="text-decoration: none;">Pas de compte? <span class="text-danger">s'inscrire</span></a>
-              </div>
-              <div class="col-md-6">
-                <a href="#" class="text-dark" style="text-decoration: none;">Mot de passe oublié?</a>
-              </div>
-            </div>
-          </form>
+<div class="container">
+  <div class="card">
+    <h2>Connexion</h2>
+    <div *ngIf="errorMessage1" class="alert alert-danger" role="alert">
+      {{ errorMessage1 }}
+    </div>
+    <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+      {{ errorMessage }}
+    </div>
+    <form>
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" name="email" placeholder="Entrez votre email" [(ngModel)]="email">
+
+      <label for="password">Mot de passe</label>
+      <div class="input-group">
+        <input type="{{ showPassword ? 'text' : 'password' }}" class="form-control" id="password" name="password" placeholder="Entrez votre mot de passe" [(ngModel)]="password1">
+        <div class="input-group-append">
+            <span class="input-group-text" (click)="toggleShowPassword()">
+              <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+            </span>
         </div>
       </div>
-    </div>
-    <div class="col"></div>
+      <br>
+      <button type="submit" (click)="login()">Se connecter</button>
+    </form>
+    <div class="switch">Pas de compte? <a routerLink="/register" >S'inscrire</a></div>
   </div>
 </div>
